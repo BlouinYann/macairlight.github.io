@@ -42,12 +42,23 @@ document.addEventListener('click', function(e) {
         window.location.href = destination;
     }
 });
-// --- PARTIE FAVICON ---
-const isSubfolderFav = window.location.pathname.includes('/collection/');
-const faviconPath = isSubfolderFav ? '../Images/icon.png' : 'Images/icon.png';
+// --- LOGIQUE FAVICON ---
+(function() {
+    const isSub = window.location.pathname.includes('/collection/');
+    // On construit le chemin : ../ si on est dans un dossier, sinon direct
+    const finalPath = (isSub ? '../' : './') + 'Images/icon.png';
 
-const favicon = document.createElement('link');
-favicon.rel = 'icon';
-favicon.type = 'image/png';
-favicon.href = faviconPath;
-document.head.appendChild(favicon);
+    // On vérifie si un lien favicon existe déjà pour ne pas faire de doublons
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+    }
+
+    link.type = 'image/png';
+    // Le "?v=1" force le navigateur à recharger l'image s'il l'avait en cache
+    link.href = finalPath + '?v=1'; 
+    
+    console.log("Tentative de chargement favicon : " + finalPath);
+})();
