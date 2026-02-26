@@ -42,13 +42,18 @@ document.addEventListener('click', function(e) {
         window.location.href = destination;
     }
 });
-// --- LOGIQUE FAVICON ---
+// --- LOGIQUE FAVICON UNIVERSELLE ---
 (function() {
-    const isSub = window.location.pathname.includes('/collection/');
-    // On construit le chemin : ../ si on est dans un dossier, sinon direct
-    const finalPath = (isSub ? '../' : './') + 'Images/icon.png';
+    // 1. On vérifie si on est sur une page projet (dans le dossier /collection/)
+    // On utilise une recherche plus précise pour éviter les erreurs de déploiement
+    const pathSegments = window.location.pathname.split('/');
+    const isSub = pathSegments.includes('collection');
 
-    // On vérifie si un lien favicon existe déjà pour ne pas faire de doublons
+    // 2. Construction du chemin relatif pur
+    // Si isSub est vrai, on met ../ sinon on reste à la racine ./
+    const prefix = isSub ? '../' : './';
+    const finalPath = prefix + 'Images/icon.png';
+
     let link = document.querySelector("link[rel~='icon']");
     if (!link) {
         link = document.createElement('link');
@@ -57,8 +62,8 @@ document.addEventListener('click', function(e) {
     }
 
     link.type = 'image/png';
-    // Le "?v=1" force le navigateur à recharger l'image s'il l'avait en cache
-    link.href = finalPath + '?v=1'; 
-    
-    console.log("Tentative de chargement favicon : " + finalPath);
+    link.href = finalPath;
+
+    // Console log pour deboguer sur le vrai site (tu pourras le supprimer après)
+    console.log("Favicon chargée via : " + finalPath + " | Pathname : " + window.location.pathname);
 })();
