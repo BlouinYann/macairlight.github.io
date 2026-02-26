@@ -35,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- PARTIE 2 : LOGIQUE DE DÉFILEMENT DU CARROUSEL ---
-    // Assure-toi que les classes correspondent à ton HTML
-    const track = document.querySelector('.carousel-track'); // Le conteneur des images
+    const track = document.querySelector('.carousel-track'); 
     const slides = Array.from(track ? track.children : []);
     
     if (track && slides.length > 0) {
@@ -53,47 +52,63 @@ document.addEventListener('DOMContentLoaded', () => {
             track.style.transform = `translateX(-${amountToMove}px)`;
         }
 
-        // Défilement automatique toutes les 3 secondes
         setInterval(moveCarousel, 3000);
     } else {
         console.log("Pas de carrousel détecté sur cette page.");
     }
+
+    // --- PARTIE 3 : RÉCUPÉRATION DES PARAMÈTRES D'URL ---
+    const categoryNames = { 'lumiere': 'Lumière', 'aquatique': 'Aquatique', 'fx': 'Effets Spéciaux' };
+    const dateFormatter = new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' });
+
+    const params = new URLSearchParams(window.location.search);
+    const catKey = params.get('cat');
+    const dateVal = params.get('date');
+    const titleVal = params.get('title');
+
+    if (catKey && categoryNames[catKey]) {
+        const autoCat = document.getElementById('auto-category');
+        if (autoCat) autoCat.textContent = categoryNames[catKey];
+    }
+
+    if (dateVal) {
+        const dateObj = new Date(dateVal);
+        let formattedDate = dateFormatter.format(dateObj);
+        formattedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+        const autoDate = document.getElementById('auto-date');
+        if (autoDate) autoDate.textContent = formattedDate;
+    }
+
+    if (titleVal) {
+        const projectTitle = document.querySelector('.project-title');
+        if (projectTitle) projectTitle.textContent = titleVal;
+        document.title = titleVal + " | Macair'Light";
+    }
+
+    // --- PARTIE 4 : CHARGEMENT HEADER/FOOTER (CORRIGÉ POUR GITHUB PAGES) ---
+    function loadComp(id, file) {
+        // Chemin absolu vers votre dépôt GitHub
+        const repoPath = '/macairlight.github.io/';
+        
+        fetch(repoPath + file)
+            .then(response => {
+                if (!response.ok) throw new Error("Erreur de chargement de " + file);
+                return response.text();
+            })
+            .then(data => {
+                // On remplace les liens relatifs simples (ex: "contact.html") 
+                // par des liens incluant le nom du dépôt (ex: "/macairlight.github.io/contact.html")
+                // Cela évite que le navigateur ne cherche à la racine du domaine .io
+                const correctedData = data.replace(/href="(?!http|#|\/)/g, `href="${repoPath}`);
+                
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerHTML = correctedData;
+                }
+            })
+            .catch(error => console.error("Erreur loadComp:", error));
+    }
+
+    loadComp('header-placeholder', 'header.html');
+    loadComp('footer-placeholder', 'footer.html');
 });
-// 1. CONFIGURATION (Identique à la page collection)
-        const categoryNames = { 'lumiere': 'Lumière', 'aquatique': 'Aquatique', 'fx': 'Effets Spéciaux' };
-        const dateFormatter = new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' });
-
-        // 2. RÉCUPÉRATION DES PARAMÈTRES D'URL
-        const params = new URLSearchParams(window.location.search);
-        const catKey = params.get('cat');
-        const dateVal = params.get('date');
-        const titleVal = params.get('title');
-
-        // 3. INJECTION DYNAMIQUE
-        // Affichage de la catégorie
-        if (catKey && categoryNames[catKey]) {
-            document.getElementById('auto-category').textContent = categoryNames[catKey];
-        }
-
-        // Affichage de la date avec majuscule
-        if (dateVal) {
-            const dateObj = new Date(dateVal);
-            let formattedDate = dateFormatter.format(dateObj);
-            formattedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-            document.getElementById('auto-date').textContent = formattedDate;
-        }
-
-        // Affichage du titre envoyé par la page collection
-        if (titleVal) {
-            document.querySelector('.project-title').textContent = titleVal;
-            document.title = titleVal + " | Macair'Light"; // Change aussi le titre de l'onglet
-        }
-
-        // 4. CHARGEMENT HEADER/FOOTER (Chemins remontés vers la racine)
-        function loadComp(id, file) {
-            fetch('../' + file) // Ajout de ../ pour aller chercher à la racine
-                .then(r => r.text())
-                .then(d => { document.getElementById(id).innerHTML = d; });
-        }
-        loadComp('header-placeholder', 'header.html');
-        loadComp('footer-placeholder', 'footer.html');
