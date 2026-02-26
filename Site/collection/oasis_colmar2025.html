@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détail Projet | Macair'Light</title>
+    
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<canvas id="particleCanvas"></canvas>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <article class="project-container">
+            <div class="project-meta">
+                <span id="auto-date" class="meta-date"></span>
+                <span id="auto-category" class="meta-category"></span>
+            </div>
+
+            <h1 class="project-title">Chargement...</h1>
+            
+            <p class="project-description">
+                Création d'un spectacle de jets d'eau et de flammes timecodé pour la ville de Colmar lors de son évènement anuel des Oasis de l'Été. Via Aquatique Show
+            </p>
+
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+
+                <div class="project-carousel">
+                    <div class="carousel-track" id="track">
+                        <img src="/Images/oasis_colmar1.jpg" alt="">
+                        <img src="/Images/oasis_colmar3.jpg" alt="">
+                        <img src="/Images/oasis_colmar2.jpg" alt="">
+                    </div>
+                </div>
+
+                <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+            <figcaption class="copyright-text">© Crédits photographiques : Ville de Colmar — Balayez pour voir plus
+            </figcaption>
+
+
+            <div class="project-footer-text" >
+                Timecode sur <u>GrandMA2</u> et visualisation sur <u>Depence R4</u>
+            </div>
+
+            <div class="actions">
+                <a href="../collection.html" class="btn-back">retour aux collections</a>
+            </div>
+        </article>
+    </main>
+
+    <div id="footer-placeholder"></div>
+<script src="../particles-config.js"></script>
+<script src="/collections.js"></script>
+</body>
+</html>
