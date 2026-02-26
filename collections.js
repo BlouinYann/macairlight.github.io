@@ -85,24 +85,29 @@ document.addEventListener('DOMContentLoaded', () => {
         document.title = titleVal + " | Macair'Light";
     }
 
-    // --- PARTIE 4 : CHARGEMENT HEADER/FOOTER (CORRIGÉ POUR GITHUB PAGES) ---
+    // --- PARTIE 4 : CHARGEMENT HEADER/FOOTER (RELATIF) ---
     function loadComp(id, file) {
-        // Chemin absolu vers votre dépôt GitHub
-        const repoPath = '/macairlight.github.io/';
-        
-        fetch(repoPath + file)
+        // On vérifie si la page actuelle est dans un sous-dossier (comme /collection/)
+        // Si oui, on ajoute "../" pour remonter à la racine
+        const isSubfolder = window.location.pathname.includes('/collection/');
+        const path = isSubfolder ? '../' + file : './' + file;
+
+        fetch(path)
             .then(response => {
-                if (!response.ok) throw new Error("Erreur de chargement de " + file);
+                if (!response.ok) throw new Error("Fichier non trouvé : " + path);
                 return response.text();
             })
             .then(data => {
-                // On remplace les liens relatifs simples (ex: "contact.html") 
-                // par des liens incluant le nom du dépôt (ex: "/macairlight.github.io/contact.html")
-                // Cela évite que le navigateur ne cherche à la racine du domaine .io
-                const correctedData = data.replace(/href="(?!http|#|\/)/g, `href="${repoPath}`);
-                
                 const element = document.getElementById(id);
                 if (element) {
+                    // Si on est dans un sous-dossier, on doit aussi corriger 
+                    // les liens du header pour qu'ils remontent d'un niveau
+                    let correctedData = data;
+                    if (isSubfolder) {
+                        // Transforme href="index.html" en href="../index.html"
+                        correctedData = data.replace(/href="(?!http|#|\/)/g, 'href="../');
+                    }
+                    
                     element.innerHTML = correctedData;
                 }
             })
