@@ -1027,3 +1027,19 @@ body.is-exiting .page-transition-overlay {
     opacity: 1;
     transform: translateY(-3px);
 }
+/* Media Query pour mobiles */
+@media (max-width: 768px) {
+    #gallery {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+        padding: 50px 5%;        /* On réduit les marges sur les côtés */
+        gap: 20px;               /* On réduit l'espace entre les cases */
+    }
+
+    .gallery-item {
+        height: 350px;           /* On réduit la hauteur des cases pour moins scroller */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;       /* On réduit la taille du titre principal */
+    }
+}
