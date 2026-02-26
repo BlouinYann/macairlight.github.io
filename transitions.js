@@ -42,3 +42,8 @@ document.addEventListener('click', function(e) {
         window.location.href = destination;
     }
 });
+const favicon = document.createElement('link');
+favicon.rel = 'icon';
+favicon.type = 'image/png';
+favicon.href = 'Images/icon.png'; // Remplace par ton fichier
+document.head.appendChild(favicon);

@@ -7,6 +7,7 @@
 }
 
 :root {
+    --background: #151515;
     --bleu-ardoise: #3a5a6b;
     --bleu-clair: #4a7a8a;
     --noir-fond: #080808;
@@ -55,7 +56,7 @@ nav {
     width: 100%;
     z-index: 1000;
     background: var(--gradient-signature);
-    border-bottom: 1px solid #151515;
+    border-bottom: 1px solid var(--noir-fond);
 }
 
 .logo-text {
@@ -149,7 +150,7 @@ footer {
     padding: 80px 8% 60px;
     text-align: center;
     background: var(--gradient-signature);
-    border-top: 1px solid #151515;
+    border-top: 1px solid var(--noir-fond);
 }
 
 .footer-content {
@@ -360,7 +361,7 @@ body, main {
         to right, 
         var(--blanc-casse) 0%, 
         var(--blanc-casse) 40%, 
-        #4a7a8a 50%, 
+        var(--bleu-clair) 50%, 
         var(--blanc-casse) 60%, 
         var(--blanc-casse) 100%
     );
@@ -433,7 +434,7 @@ body, main {
 .btn-decouvrir {
     display: inline-block;
     padding: 12px 30px;
-    border: 1px solid #4a7a8a; /* Ton bleu ardoise */
+    border: 1px solid var(--bleu-clair); /* Ton bleu ardoise */
     color: var(--blanc-casse);
     text-decoration: none;
     
@@ -448,9 +449,9 @@ body, main {
 }
 
 .btn-decouvrir:hover {
-    background: #4a7a8a;
+    background: var(--bleu-clair);
     color: #fff;
-    box-shadow: 0 0 15px rgba(74, 122, 138, 0.3);
+    box-shadow: 0 0 15px var(--bleu-clair) 20%;
 }
 .project-container {
             max-width: 900px;
@@ -475,7 +476,7 @@ body, main {
 
         .meta-category {
             font-size: 0.8rem;
-            color: #4a7a8a; /* Bleu plus visible défini précédemment */
+            color: var(--bleu-clair); /* Bleu plus visible défini précédemment */
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 700;
@@ -500,7 +501,7 @@ body, main {
         .project-image { 
             width: 100%; 
             height: auto; 
-            border: 1px solid #151515; 
+            border: 1px solid var(--noir-fond); 
             display: block;
         }
 
@@ -521,7 +522,7 @@ body, main {
             height: 0; 
             overflow: hidden; 
             margin: 80px 0 40px; 
-            border: 1px solid #151515; 
+            border: 1px solid var(--noir-fond); 
         }
 
         .video-wrapper iframe { 
@@ -540,7 +541,7 @@ body, main {
         }
 
         .actions { 
-            border-top: 1px solid #151515; 
+            border-top: 1px solid var(--noir-fond); 
             padding-top: 60px; 
             margin-top: 40px;
         }
@@ -647,7 +648,7 @@ body, main {
             font-family: 'Inter', sans-serif;
             opacity: 0.8;
             padding-bottom: 5px;
-            border-bottom: 1px solid rgba(58, 90, 107, 0.6);
+            border-bottom: 1px solid var(--bleu-clair) 50%;
         }
 
         /* INFOS PROJET */
@@ -656,14 +657,14 @@ body, main {
             bottom: 0;
             z-index: 3;
             /* Doit être au-dessus de l'image */
-            background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
+            background: linear-gradient(to top, var(--noir-fond) 0%, noir 100%);
             width: 100%;
             padding: 40px 20px;
         }
 
         .item-category {
             font-size: 0.8rem;
-            color: #4a7a8a;
+            color: var(--bleu-clair);
             /* Bleu plus visible */
             letter-spacing: 3px;
             margin-bottom: 12px;
@@ -755,7 +756,7 @@ body, main {
     transition: 0.3s;
 }
 
-.carousel-btn:hover { background: #4a7a8a; }
+.carousel-btn:hover { background: var(--bleu-clair); }
 .prev { left: 0; }
 .next { right: 0; }
 
@@ -805,7 +806,7 @@ body, main {
 
 .about-text h2 {
     margin-top: 0;
-    color: #4a7a8a;
+    color: var(--bleu-clair);
     font-size: 2.2rem;
 }
 
@@ -843,7 +844,7 @@ body, main {
     background: linear-gradient(
         to right, 
         rgba(255, 255, 255, 0) 0%,    /* Transparent à gauche */
-        rgb(74, 122, 138) 50%,  /* Blanc semi-transparent au centre */
+        var(--bleu-clair) 50%,  /* Blanc semi-transparent au centre */
         rgba(255, 255, 255, 0) 100%   /* Transparent à droite */
     );
 }
@@ -885,7 +886,7 @@ body, main {
 }
 
 .form-group label {
-    color: #4a7a8a; /* Ta couleur bleue d'accentuation */
+    color: var(--bleu-clair); /* Ta couleur bleue d'accentuation */
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -904,14 +905,14 @@ body, main {
 
 .contact-form input:focus, 
 .contact-form textarea:focus {
-    border-color: #4a7a8a;
+    border-color: var(--bleu-clair);
     background: rgba(255, 255, 255, 0.1);
 }
 
 .submit-btn {
     background: transparent;
-    border: 1px solid #4a7a8a;
-    color: #4a7a8a;
+    border: 1px solid var(--bleu-clair);
+    color: var(--bleu-clair);
     padding: 15px;
     cursor: pointer;
     font-size: 1rem;
@@ -922,9 +923,9 @@ body, main {
 }
 
 .submit-btn:hover {
-    background: #4a7a8a;
+    background: var(--bleu-clair);
     color: white;
-    box-shadow: 0 0 20px rgba(74, 122, 138, 0.4);
+    box-shadow: 0 0 20px rgba(var(--bleu-clair-rgb), 0.4);
 }
 
 /* Ajustement mobile */
@@ -950,7 +951,7 @@ body, main {
 
 .contact-info-box .label {
     display: block;
-    color: #4a7a8a; /* Ton bleu */
+    color: var(--bleu-clair); /* Ton bleu */
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -966,7 +967,7 @@ body, main {
 }
 
 .email-link:hover {
-    color: rgb(74, 122, 138);
+    color: rgb(--bleu-clair-rgb);
     letter-spacing: 1px;
 }
 /* L'overlay créé par le JS */
@@ -976,7 +977,7 @@ body, main {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #080808; /* Vérifie bien que c'est ton bleu exact */
+    background-color: var(--noir-fond); /* Vérifie bien que c'est ton bleu exact */
     z-index: 10000;
     display: flex;
     justify-content: center;
@@ -988,7 +989,7 @@ body, main {
 
 /* Le texte Macair'Light */
 .loader-content {
-    color: rgb(74, 122, 138, 0.25);
+    color: var(--bleu-clair);
     font-family: 'GlimmerOfLight', serif;
     text-align: center;
     font-size: clamp(3.5rem, 10vw, 6.5rem); margin-bottom: 10px; 
@@ -1023,7 +1024,7 @@ body.is-exiting .page-transition-overlay {
 
 /* L'effet au survol reste prioritaire */
 .social-icon:hover {
-    color: #4a7a8a !important; /* Ton bleu Macair'Light */
+    color: var(--bleu-clair) !important; /* Ton bleu Macair'Light */
     opacity: 1;
     transform: translateY(-3px);
 }
