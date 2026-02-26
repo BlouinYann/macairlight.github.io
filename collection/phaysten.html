@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détail Projet | Macair'Light</title>
+    
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<canvas id="particleCanvas"></canvas>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <article class="project-container">
+            <div class="project-meta">
+                <span id="auto-date" class="meta-date"></span>
+                <span id="auto-category" class="meta-category"></span>
+            </div>
+
+            <h1 class="project-title">Chargement...</h1>
+            
+            <p class="project-description">
+                Création Lumière et Vidéo e l'Artiste Phaysten et de son album <i>Marées Hautes</i> pour différentes dates dans les Pays de la Loire.
+            </p>
+
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+
+                <div class="project-carousel">
+                    <div class="carousel-track" id="track">
+                        <img src="/Images/phaysten2.avif" alt="">
+                        <img src="/Images/phaysten1.avif" alt="">
+                    </div>
+                </div>
+
+                <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+            <figcaption class="copyright-text">© Crédits photographiques : fabienrabillard — Balayez pour voir plus
+            </figcaption>
+
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/oRvAygQtV1s" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="project-footer-text" hidden>
+                Création sur <u>GrandMA2</u> et <u>OBS Studio</u>
+            </div>
+
+            <div class="actions">
+                <a href="../collection.html" class="btn-back">retour aux collections</a>
+            </div>
+        </article>
+    </main>
+
+    <div id="footer-placeholder"></div>
+<script src="../particles-config.js"></script>
+<script src="/collections.js"></script>
+</body>
+</html>

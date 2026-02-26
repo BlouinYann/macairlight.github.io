@@ -1,0 +1,1029 @@
+/* --- CONFIGURATION DES POLICES --- */
+@font-face {
+    font-family: 'GlimmerOfLight';
+    src: url('glimmer_of_light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --bleu-ardoise: #3a5a6b;
+    --bleu-clair: #4a7a8a;
+    --noir-fond: #080808;
+    --gris-moyen: #75757a;
+    --blanc-casse: #e2e2e5;
+    --gradient-signature: radial-gradient(circle at center, #111 0%, #080808 100%);
+}
+
+/* --- BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--noir-fond);
+    color: var(--blanc-casse);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* --- TITRES --- */
+h1,
+h2,
+h3,
+.loader-content,
+.logo-text,
+.filter-btn,
+.sort-btn,
+.btn-back {
+    font-family: 'GlimmerOfLight', serif;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+/* --- NAVIGATION (HEADER) --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background: var(--gradient-signature);
+    border-bottom: 1px solid #151515;
+}
+
+.logo-text {
+    font-size: 1.6rem;
+    color: var(--blanc-casse);
+    text-decoration: none;
+}
+
+.logo-text span {
+    color: var(--bleu-ardoise);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links a,
+.nav-links a:visited {
+    color: var(--gris-moyen) !important;
+    /* On force le gris d'origine */
+    text-decoration: none;
+    transition: color 0.4s ease;
+}
+
+/* 2. État au survol (hover) */
+.nav-links a:hover {
+    color: var(--blanc-casse) !important;
+    /* Devient blanc uniquement quand la souris est dessus */
+}
+
+/* --- BOUTONS & LIENS (CORRECTION COULEUR VISITÉE) --- */
+/* Pour tous les liens du site, on empêche le bleu/violet du navigateur */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+    /* Reste la couleur d'origine même après clic */
+}
+
+/* Bouton Retour (Projets) */
+.btn-back {
+    display: inline-block;
+    color: var(--blanc-casse);
+    text-transform: lowercase;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-back:visited {
+    color: var(--blanc-casse);
+    /* Sécurité pour éviter le bleu */
+}
+
+.btn-back:hover {
+    opacity: 0.6;
+}
+
+/* Bouton Ligne (Accueil/Contact) */
+.btn-line {
+    display: inline-block;
+    padding: 15px 45px;
+    border: 1px solid var(--bleu-ardoise);
+    color: var(--blanc-casse);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+    background: transparent;
+}
+
+.btn-line:hover {
+    background: var(--bleu-ardoise);
+    color: white;
+    letter-spacing: 6px;
+    transform: translateY(-2px);
+}
+
+.btn-line:visited {
+    color: var(--blanc-casse);
+}
+
+/* --- PIED DE PAGE (FOOTER) --- */
+footer {
+    padding: 80px 8% 60px;
+    text-align: center;
+    background: var(--gradient-signature);
+    border-top: 1px solid #151515;
+}
+
+.footer-content {
+    font-size: 0.75rem;
+    color: var(--gris-moyen);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.footer-contact-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--blanc-casse);
+    text-decoration: none;
+    font-family: 'GlimmerOfLight', serif;
+    font-size: 1.4rem;
+    transition: opacity 0.3s ease;
+    text-transform: lowercase;
+    /* Tout en minuscules comme demandé */
+}
+
+.footer-contact-link:hover,
+.footer-contact-link:visited {
+    opacity: 0.7;
+    color: var(--blanc-casse);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    nav {
+        padding: 20px 5%;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+/* --- CONFIGURATION DU CANVAS DE PARTICULES --- */
+#particleCanvas {
+    /* Fixe le canvas pour qu'il couvre toute la fenêtre même au scroll */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Place le canvas derrière TOUT le contenu du site */
+    z-index: -1; 
+    
+    /* Couleur de fond par défaut (ton noir profond) */
+    background-color: var(--noir-fond);
+    
+    /* TRÈS IMPORTANT : empêche le canvas de bloquer les clics sur les boutons */
+    pointer-events: none; 
+    
+    /* Optimisation du rendu pour les animations fluides */
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+/* --- OPTIONNEL : RENDRE LE BODY TRANSPARENT --- */
+/* Pour être sûr que le fond des sections ne cache pas les particules */
+body, main {
+    background: transparent;
+}
+.hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: transparent; /* Transparent pour voir les particules */
+        }
+
+        .hero-content { position: relative; z-index: 2; margin-top: 80px; }
+        .hero h1 { font-size: clamp(3.5rem, 10vw, 6.5rem); margin-bottom: 10px; }
+        .hero p {
+            font-size: 0.9rem;
+            color: var(--gris-moyen);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .btn-line {
+            padding: 12px 40px;
+            border: 1px solid var(--bleu-ardoise);
+            color: var(--blanc-casse);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+        }
+        .btn-line:hover { background: var(--bleu-ardoise); color: white; }
+
+        /* Grille expertise */
+        .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 100px 8%;
+    background: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(5px);
+    /* On ajoute une transition fluide pour le changement de hauteur du container */
+    transition: all 0.6s ease-in-out; 
+}
+
+.expertise-item { 
+    text-align: center; 
+    padding: 20px;
+    /* --- NOUVEAU : Animation de base --- */
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+    display: block; 
+}
+
+/* --- NOUVEAU : État quand on filtre (cache) --- */
+.expertise-item.hidden {
+    opacity: 0;
+    transform: scale(0.7); /* Rétrécit un peu */
+    pointer-events: none;
+    /* Pour que l'élément disparaisse de la grille sans laisser de trou géant */
+    display: none; 
+}
+        .expertise-item h3 { color: var(--bleu-ardoise); font-size: 1.5rem; margin-bottom: 15px; }
+        .expertise-item p { color: var(--gris-moyen); font-size: 0.9rem; font-weight: 300; }
+
+        /* Section À Propos */
+        .section-about {
+            padding: 120px 15%;
+            text-align: center;
+            background: transparent;
+        }
+        .section-about h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .divider { height: 1px; width: 40px; background-color: var(--bleu-ardoise); margin: 0 auto 40px; }
+        .section-about p { max-width: 700px; margin: 0 auto 20px; color: var(--gris-moyen); font-size: 1.1rem; }
+
+        @media (max-width: 768px) {
+            .expertise-grid { grid-template-columns: 1fr; }
+        }
+        /* --- LE CONTENEUR DE L'IMAGE (LA FORME) --- */
+.image-container {
+    width: 100%;
+    height: 100%;      /* Prend toute la hauteur du parent (.gallery-item) */
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;  /* Coupe ce qui dépasse */
+    z-index: 1;        /* Derrière les textes (item-info) */
+}
+
+/* --- L'IMAGE (LE REMPLISSAGE) --- */
+.image-container img {
+    width: 100%;
+    height: 100%;
+    
+    /* MAGIE : Remplit la forme sans déformer */
+    object-fit: cover; 
+    
+    /* CENTRE l'image pour que le milieu soit toujours visible */
+    object-position: center; 
+    
+    transition: transform 1.2s ease, opacity 0.6s ease;
+    display: block;
+}
+
+/* --- EFFET AU SURVOL --- */
+.gallery-item:hover .image-container img {
+    transform: scale(1.1); /* Zoom léger lors du hover */
+    opacity: 0.6;          /* S'éclaircit légèrement au survol */
+}
+
+.logo-central {
+    /* --- SÉCURITÉ ANTI-SÉLECTION --- */
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+
+    /* --- AFFICHAGE ET ANTI-CROP RADICAL --- */
+    display: inline-block;
+    position: relative;
+    
+    /* On utilise padding + margin pour créer une zone de sécurité */
+    padding: 0.3em 0.6em; 
+    margin: -0.3em -0.6em;
+    
+    /* La propriété magique pour les empattements qui dépassent */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    
+    /* Hauteur de ligne généreuse pour le haut du L */
+    line-height: 1.6;
+    overflow: visible;
+
+    /* --- COULEUR ET REFLET RÉACTIF --- */
+    color: var(--blanc-casse);
+    
+    background: linear-gradient(
+        to right, 
+        var(--blanc-casse) 0%, 
+        var(--blanc-casse) 40%, 
+        #4a7a8a 50%, 
+        var(--blanc-casse) 60%, 
+        var(--blanc-casse) 100%
+    );
+    
+    /* On reste sur 300% pour la réactivité */
+    background-size: 300% 100%;
+    background-position: 95% center; /* Départ très proche du bleu */
+    
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Transition pour un retour fluide au blanc */
+    transition: background-position 0.8s ease-out;
+}
+
+/* --- ANIMATION AU SURVOL --- */
+.logo-central:hover {
+    /* Départ immédiat à 95% -> Fin à 5% */
+    animation: reflect-instant-no-crop 3s cubic-bezier(0.1, 0, 0.3, 1) forwards;
+}
+
+@keyframes reflect-instant-no-crop {
+    0% {
+        background-position: 95% center;
+    }
+    100% {
+        background-position: 5% center;
+    }
+}
+.sub-logo {
+    user-select: none;
+    -webkit-user-select: none;
+    color: var(--blanc-casse);
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Style pour chaque lettre générée par le JS */
+#typing-text span {
+    opacity: 0;
+    display: inline-block; /* Nécessaire pour l'animation */
+    transform: translateY(5px);
+    transition: all 0.4s ease;
+}
+
+/* Classe ajoutée par le JS pour l'apparition */
+#typing-text span.fade-in-char {
+    opacity: 1;
+    transform: translateY(0px);
+}
+/* Le conteneur qui gère l'apparition */
+#cta-container {
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 1s ease, transform 1s ease;
+    pointer-events: none;
+    text-align: center; /* Pour être sûr qu'il reste centré en X */
+}
+
+/* La classe ajoutée par le JS */
+#cta-container.show-btn {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* LE BOUTON ET SA POLICE */
+.btn-decouvrir {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid #4a7a8a; /* Ton bleu ardoise */
+    color: var(--blanc-casse);
+    text-decoration: none;
+    
+    /* --- FORCE TA POLICE ICI --- */
+    font-family: 'TaPoliceIci', sans-serif; 
+    font-size: 1rem;
+    letter-spacing: 2px; /* Un peu d'espace pour le côté luxe */
+    text-transform: uppercase; /* Souvent plus beau pour un CTA */
+    
+    transition: all 0.4s ease;
+    background: transparent;
+}
+
+.btn-decouvrir:hover {
+    background: #4a7a8a;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(74, 122, 138, 0.3);
+}
+.project-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 160px 5% 100px;
+            text-align: center;
+        }
+
+        /* Zone Meta (Date & Catégorie) */
+        .project-meta {
+            margin-bottom: 20px;
+        }
+
+        .meta-date {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--gris-moyen);
+            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 5px;
+        }
+
+        .meta-category {
+            font-size: 0.8rem;
+            color: #4a7a8a; /* Bleu plus visible défini précédemment */
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .project-title { 
+            font-size: clamp(2.5rem, 8vw, 4rem); 
+            margin-top: 10px;
+            margin-bottom: 30px; 
+            font-family: 'GlimmerOfLight', serif;
+        }
+
+        .project-description { 
+            font-size: 1.1rem; 
+            color: var(--gris-moyen); 
+            max-width: 700px; 
+            margin: 0 auto 60px; 
+            font-weight: 300;
+        }
+
+        /* Photo et Copyright */
+        .project-image { 
+            width: 100%; 
+            height: auto; 
+            border: 1px solid #151515; 
+            display: block;
+        }
+
+        .copyright-text { 
+            display: block; 
+            margin-top: 15px; 
+            font-size: 0.75rem; 
+            color: var(--gris-moyen); 
+            font-style: italic; 
+            letter-spacing: 1px;
+            margin-bottom: 60px;
+        }
+
+        /* Vidéo */
+        .video-wrapper { 
+            position: relative; 
+            padding-bottom: 56.25%; 
+            height: 0; 
+            overflow: hidden; 
+            margin: 80px 0 40px; 
+            border: 1px solid #151515; 
+        }
+
+        .video-wrapper iframe { 
+            position: absolute; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+        }
+
+        /* Texte du bas */
+        .project-footer-text { 
+            font-size: 0.95rem; 
+            color: var(--gris-moyen); 
+            max-width: 650px; 
+            margin: 0 auto 60px; 
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .actions { 
+            border-top: 1px solid #151515; 
+            padding-top: 60px; 
+            margin-top: 40px;
+        }
+
+        /* Bouton retour (Forcé en blanc via style.css, mais rappel ici par sécurité) */
+        .btn-back {
+            color: var(--blanc-casse);
+            text-decoration: none;
+            font-family: 'GlimmerOfLight', serif;
+        }
+
+        @media (max-width: 768px) {
+            .project-container { padding-top: 120px; }
+        }
+                .collections-header {
+            padding: 160px 8% 40px;
+            text-align: center;
+        }
+
+        .collections-header h1 {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            margin-bottom: 40px;
+        }
+
+        /* FILTRES & TRI */
+        .controls-wrapper {
+            margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .filters,
+        .sorting {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn,
+        .sort-btn {
+            background: transparent;
+            border: none;
+            color: var(--gris-moyen);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            text-transform: lowercase;
+            font-family: 'GlimmerOfLight', serif;
+        }
+
+        .filter-btn.active,
+        .sort-btn.active {
+            color: var(--blanc-casse);
+            border-bottom: 1px solid var(--bleu-ardoise);
+        }
+
+        /* GRILLE */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 8% 120px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 500px;
+            background: #111;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Animation fluide */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            transition: transform 1.2s ease, opacity 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            opacity: 0.5;
+        }
+        .gallery-item.is-hidden {
+    display: none; /* On garde le display none pour boucher les trous */
+}
+
+        /* DATE ÉPINGLÉE (Auto-remplie) */
+        .item-date {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            z-index: 10;
+            font-size: 0.65rem;
+            color: var(--blanc-casse);
+            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.8;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(58, 90, 107, 0.6);
+        }
+
+        /* INFOS PROJET */
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            z-index: 3;
+            /* Doit être au-dessus de l'image */
+            background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .item-category {
+            font-size: 0.8rem;
+            color: #4a7a8a;
+            /* Bleu plus visible */
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            display: block;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .item-info h3 {
+            font-size: 1.8rem;
+            color: var(--blanc-casse);
+            margin-bottom: 12px;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: var(--gris-moyen);
+            font-weight: 300;
+            max-width: 280px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    
+/* 1. Le cadre extérieur (la fenêtre) */
+.carousel-container {
+    width: 100%; 
+    height: 500px; 
+    overflow: hidden; 
+    position: relative;
+    /* CHANGEMENT ICI : Fond transparent */
+    background-color: transparent; 
+}
+
+/* 2. Le rail qui porte les images */
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Sécurité : le rail doit aussi être transparent */
+    background: transparent;
+}
+
+/* 3. Chaque compartiment d'image */
+.carousel-slide {
+    flex: 0 0 100%; 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;     /* Centre verticalement (Y) */
+    justify-content: center;   /* Centre horizontalement (X) */
+    /* CHANGEMENT ICI : Fond transparent */
+    background: transparent;
+}
+
+/* 4. L'IMAGE */
+.carousel-slide img, .carousel-track img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;     
+    object-position: center; 
+    display: block;
+    /* On s'assure qu'il n'y a pas de fond sur l'image elle-même */
+    background: transparent;
+}
+
+/* Boutons Flèches */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    font-size: 1.8rem;
+    padding: 15px 10px;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.carousel-btn:hover { background: #4a7a8a; }
+.prev { left: 0; }
+.next { right: 0; }
+
+@media (max-width: 768px) {
+    .carousel-container { height: 350px; }
+}
+/* ==========================================================================
+   PAGE QUI SUIS-JE (MISE À JOUR 50/50)
+   ========================================================================== */
+.about-container {
+    max-width: 1400px; /* Élargi pour mieux profiter de l'espace */
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.about-content {
+    display: flex;
+    gap: 40px; 
+    align-items: center; /* Centre verticalement le texte par rapport à l'image */
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.about-image {
+    flex: 1; /* Prend exactement 50% de la largeur */
+    display: flex;
+    justify-content: center;
+}
+
+.about-image img {
+    width: 100%;      /* L'image prend toute la largeur de sa colonne (la moitié de la page) */
+    height: auto;     /* Garde les proportions */
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    object-fit: cover; /* Si l'image est très haute, elle sera proprement cadrée */
+}
+
+.about-text {
+    flex: 1; /* Prend l'autre 50% de la largeur */
+    color: #fff;
+    line-height: 1.8;
+    padding: 20px;
+}
+
+.about-text h2 {
+    margin-top: 0;
+    color: #4a7a8a;
+    font-size: 2.2rem;
+}
+
+/* Responsive : repasse en plein écran sur mobile */
+@media (max-width: 900px) {
+    .about-content {
+        flex-direction: column;
+    }
+    
+    .about-image, .about-text {
+        flex: none;
+        width: 100%;
+    }
+}
+.about-image img {
+    width: 100%;      
+    height: auto;     
+    /* On retire l'arrondi */
+    border-radius: 0; 
+    /* On retire la ligne blanche (bordure) */
+    border: none;     
+    /* On garde l'ombre pour le relief, ou on l'enlève aussi si tu veux du plat total */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8); 
+    display: block;
+    object-fit: cover;
+}
+
+.text-separator {
+    width: 100%;                /* Elle occupe toute la largeur de la colonne texte */
+    height: 1px;                /* Épaisseur d'un seul pixel pour la finesse */
+    margin: 35px 0;             /* Espace équilibré entre les paragraphes */
+    border: none;
+    
+    /* Dégradé radial ou linéaire pour l'effet de disparition sur les côtés */
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0) 0%,    /* Transparent à gauche */
+        rgb(74, 122, 138) 50%,  /* Blanc semi-transparent au centre */
+        rgba(255, 255, 255, 0) 100%   /* Transparent à droite */
+    );
+}
+.about-text pj {
+    color: #fff;
+    line-height: 1.8;
+    
+    /* JUSTIFICATION DU TEXTE */
+    text-align: justify;
+    
+    /* OPTIONNEL : Pour éviter les gros trous entre les mots */
+    hyphens: auto; 
+    
+    margin-bottom: 20px;
+}
+/* ==========================================================================
+   PAGE CONTACT
+   ========================================================================== */
+.contact-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 40px;
+    border-radius: 0; /* Pour rester sur ton style bords droits */
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #4a7a8a; /* Ta couleur bleue d'accentuation */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+    color: white;
+    font-family: inherit;
+    outline: none;
+    transition: 0.3s;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    border-color: #4a7a8a;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.submit-btn {
+    background: transparent;
+    border: 1px solid #4a7a8a;
+    color: #4a7a8a;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.4s;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background: #4a7a8a;
+    color: white;
+    box-shadow: 0 0 20px rgba(74, 122, 138, 0.4);
+}
+
+/* Ajustement mobile */
+@media (max-width: 600px) {
+    .contact-form {
+        padding: 20px;
+    }
+}
+.direct-contact {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-info-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 40px;
+    text-align: center;
+    width: 100%;
+    backdrop-filter: blur(10px);
+}
+
+.contact-info-box .label {
+    display: block;
+    color: #4a7a8a; /* Ton bleu */
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.email-link {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.email-link:hover {
+    color: rgb(74, 122, 138);
+    letter-spacing: 1px;
+}
+/* L'overlay créé par le JS */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #080808; /* Vérifie bien que c'est ton bleu exact */
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1; /* On commence opaque */
+    transition: opacity 1s ease-in-out;
+    pointer-events: none;
+}
+
+/* Le texte Macair'Light */
+.loader-content {
+    color: rgb(74, 122, 138, 0.25);
+    font-family: 'GlimmerOfLight', serif;
+    text-align: center;
+    font-size: clamp(3.5rem, 10vw, 6.5rem); margin-bottom: 10px; 
+    margin-top: -85px;
+    margin-left: -15px;}
+
+/* ÉTATS */
+body.is-loaded .page-transition-overlay {
+    opacity: 0;
+}
+
+body.is-exiting .page-transition-overlay {
+    opacity: 1 !important;
+    pointer-events: all;
+}
+.footer-socials {
+    margin-bottom: 15px; /* Espace avec le texte en dessous */
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacement entre les icônes */
+}
+
+/* On force la couleur pour l'état normal ET l'état visité */
+.social-icon, 
+.social-icon:visited {
+    color: rgba(226, 226, 229, 0.8); /* La couleur de ton paragraphe <p> */
+    opacity: 0.7;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* L'effet au survol reste prioritaire */
+.social-icon:hover {
+    color: #4a7a8a !important; /* Ton bleu Macair'Light */
+    opacity: 1;
+    transform: translateY(-3px);
+}
