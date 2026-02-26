@@ -34,27 +34,62 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 80);
     }
 
-    // --- PARTIE 2 : LOGIQUE DE DÉFILEMENT DU CARROUSEL ---
-    const track = document.querySelector('.carousel-track'); 
+    // --- PARTIE 2 : LOGIQUE DU CARROUSEL (AUTO + MANUEL + HOVER) ---
+    const track = document.getElementById('track'); 
     const slides = Array.from(track ? track.children : []);
-    
-    if (track && slides.length > 0) {
-        console.log("Carrousel détecté, démarrage du mouvement...");
-        
-        let currentIndex = 0;
+    let currentIndex = 0;
+    let autoPlayInterval;
 
-        function moveCarousel() {
-            currentIndex++;
-            if (currentIndex >= slides.length) {
-                currentIndex = 0;
-            }
-            const amountToMove = slides[currentIndex].offsetWidth * currentIndex;
-            track.style.transform = `translateX(-${amountToMove}px)`;
+    // 1. Fonction de mouvement (Manuelle)
+    window.moveSlide = function(direction) {
+        if (!track || slides.length === 0) return;
+
+        currentIndex += direction;
+
+        if (currentIndex >= slides.length) {
+            currentIndex = 0;
+        } else if (currentIndex < 0) {
+            currentIndex = slides.length - 1;
         }
 
-        setInterval(moveCarousel, 3000);
+        updateCarousel();
+    };
+
+    // 2. Mise à jour de l'affichage
+    function updateCarousel() {
+        if (!slides[currentIndex]) return;
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    }
+
+    // 3. Gestion de l'Automatique
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            moveSlide(1);
+        }, 3000); // 3 secondes
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+
+    // 4. Initialisation et Événements
+    if (track && slides.length > 0) {
+        console.log("Carrousel activé.");
+
+        startAutoPlay();
+
+        // Arrêt quand la souris est sur le carrousel
+        const container = document.querySelector('.carousel-container');
+        if (container) {
+            container.addEventListener('mouseenter', stopAutoPlay);
+            container.addEventListener('mouseleave', startAutoPlay);
+        }
+
+        // Ajustement si on redimensionne la fenêtre
+        window.addEventListener('resize', updateCarousel);
     } else {
-        console.log("Pas de carrousel détecté sur cette page.");
+        console.log("Pas de carrousel sur cette page.");
     }
 
     // --- PARTIE 3 : RÉCUPÉRATION DES PARAMÈTRES D'URL ---
