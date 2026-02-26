@@ -42,8 +42,12 @@ document.addEventListener('click', function(e) {
         window.location.href = destination;
     }
 });
+// --- PARTIE FAVICON ---
+const isSubfolderFav = window.location.pathname.includes('/collection/');
+const faviconPath = isSubfolderFav ? '../Images/icon.png' : 'Images/icon.png';
+
 const favicon = document.createElement('link');
 favicon.rel = 'icon';
 favicon.type = 'image/png';
-favicon.href = '../Images/icon.png'; // Remplace par ton fichier
+favicon.href = faviconPath;
 document.head.appendChild(favicon);
