@@ -266,14 +266,32 @@ body, main {
     transition: all 0.6s ease-in-out; 
 }
 
-.expertise-item { 
-    text-align: center; 
-    padding: 20px;
-    /* --- NOUVEAU : Animation de base --- */
+/* --- EFFET AU SURVOL : LE TEXTE RESSORT --- */
+.expertise-item:hover {
+    transform: scale(1.03); 
+    background: rgba(255, 255, 255, 0.02); /* Fond très discret pour le contraste */
+    border-radius: 12px;
+}
+
+/* Le titre ressort avec un éclat lumineux */
+.expertise-item h3 {
+    transition: text-shadow 0.4s ease, color 0.4s ease;
+}
+
+/* Effet Flare pour Lumière */
+.expertise-item:hover h3 {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Le paragraphe devient aussi plus lisible */
+.expertise-item p {
+    transition: opacity 0.4s ease;
+    opacity: 0.7;
+}
+
+.expertise-item:hover p {
     opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
-    display: block; 
 }
 
 /* --- NOUVEAU : État quand on filtre (cache) --- */
@@ -970,41 +988,8 @@ body, main {
     color: rgb(--bleu-clair-rgb);
     letter-spacing: 1px;
 }
-/* L'overlay créé par le JS */
-.page-transition-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--noir-fond); /* Vérifie bien que c'est ton bleu exact */
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1; /* On commence opaque */
-    transition: opacity 1s ease-in-out;
-    pointer-events: none;
-}
-
-/* Le texte Macair'Light */
-.loader-content {
-    color: var(--bleu-clair);
-    font-family: 'GlimmerOfLight', serif;
-    text-align: center;
-    font-size: clamp(3.5rem, 10vw, 6.5rem); margin-bottom: 10px; 
-    margin-top: -85px;
-    margin-left: -15px;}
 
 /* ÉTATS */
-body.is-loaded .page-transition-overlay {
-    opacity: 0;
-}
-
-body.is-exiting .page-transition-overlay {
-    opacity: 1 !important;
-    pointer-events: all;
-}
 .footer-socials {
     margin-bottom: 15px; /* Espace avec le texte en dessous */
     display: flex;
@@ -1043,4 +1028,117 @@ body.is-exiting .page-transition-overlay {
     .hero h1 {
         font-size: 2.5rem;       /* On réduit la taille du titre principal */
     }
+}
+
+
+
+/* --- BASE --- */
+.expertise-item { 
+    text-align: center; padding: 40px 20px;
+    display: block; position: relative; overflow: hidden;
+    background: transparent; border: none;
+    transition: transform 0.5s ease; cursor: pointer;
+}
+.expertise-item:hover { transform: scale(1.03); }
+.expertise-item h3 { color: var(--bleu-ardoise); font-size: 1.5rem; margin-bottom: 15px; transition: 0.4s; position: relative; z-index: 2; }
+.expertise-item p { color: var(--gris-moyen); font-size: 0.9rem; font-weight: 300; transition: 0.4s; position: relative; z-index: 2; }
+
+/* --- 1. LUMIÈRE : FLARE STOP-AND-GO --- */
+.item-lumiere {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Le flare qui arrive et s'arrête au milieu */
+.item-lumiere::before {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: -150%; /* Départ à gauche */
+    width: 100%; height: 100%;
+    background: linear-gradient(105deg, 
+        transparent 20%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        transparent 80%);
+    pointer-events: none;
+    z-index: 1;
+    /* Transition d'entrée : s'arrête au milieu */
+    transition: left 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.item-lumiere:hover::before {
+    left: 0%; /* Milieu */
+}
+
+/* Le flare qui finit sa course quand on part */
+.item-lumiere::after {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0%; /* Part du milieu */
+    width: 100%; height: 100%;
+    background: linear-gradient(105deg, 
+        transparent 20%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        transparent 80%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    /* Transition de sortie : finit sa route à droite */
+    transition: left 0.6s ease-in, opacity 0.6s;
+}
+
+/* Quand on survole, on cache le flare de sortie pour préparer le retour */
+.item-lumiere:hover::after {
+    left: -150%; 
+    opacity: 0;
+    transition: none; /* Reset instantané sans animation */
+}
+
+/* Quand la souris part, le flare de sortie devient visible et s'en va */
+.item-lumiere:not(:hover)::after {
+    left: 150%;
+    opacity: 1;
+}
+
+.item-lumiere:hover h3 { 
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8); 
+    color: #fff; 
+}
+
+/* --- 2. AQUATIQUE : GOUTTES NETTES & DÉFORMATION --- */
+.item-aquatique:hover {
+    filter: url(#water-filter); 
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.item-aquatique::before {
+    content: "";
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0; transition: opacity 0.4s ease;
+    background-image: 
+        radial-gradient(circle at 18% 28%, white 1px, transparent 2px),
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 10px, rgba(0,0,0,0.3) 15px, transparent 16px),
+        radial-gradient(circle at 73% 13%, white 1.5px, transparent 3.5px),
+        radial-gradient(circle at 75% 15%, rgba(255,255,255,0.1) 15px, rgba(0,0,0,0.25) 20px, transparent 21px),
+        radial-gradient(circle at 43% 78%, white 1px, transparent 2.5px),
+        radial-gradient(circle at 45% 80%, rgba(255,255,255,0.1) 8px, rgba(0,0,0,0.2) 12px, transparent 13px);
+}
+.item-aquatique:hover::before { opacity: 1; }
+
+/* --- 3. EFFETS SPÉCIAUX : FEU & SCINTILLEMENT --- */
+.item-speciaux:hover {
+    background: linear-gradient(0deg, rgba(255, 69, 0, 0.15) 0%, transparent 100%);
+    box-shadow: inset 0 -20px 50px rgba(255, 69, 0, 0.3);
+}
+
+.item-speciaux:hover h3 {
+    color: #ff4500;
+    text-shadow: 0 0 10px #ff4500, 0 0 20px #ff0000;
+    animation: flicker 0.15s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.8; transform: skewX(-1deg) scale(1.05); }
+    100% { opacity: 1; transform: skewX(1deg) scale(1); }
 }

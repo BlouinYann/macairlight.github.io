@@ -22,21 +22,34 @@
                 <div id="cta-container">
                     <a href="collection.html" class="btn-decouvrir">Découvrir l'univers</a>
                 </div>
-            </div> </header> <section id="expertise" class="expertise-grid">
-            <div class="expertise-item">
-                <h3>Lumière</h3>
-                <p>Conception d'ambiances lumineuses et scénographies sur mesure.</p>
             </div>
-            <div class="expertise-item">
-                <h3>Aquatique</h3>
-                <p>Mise en mouvement de l'eau pour des chorégraphies aquatiques.</p>
+        </header>
+        <section id="expertise" class="expertise-grid">
+            <div class="expertise-item item-lumiere">
+                <a href="collection.html?type=lumiere" class="expertise-item">
+                    <h3>Lumière</h3>
+                    <p>Conception d'ambiances lumineuses et scénographies sur mesure.</p>
+                </a>
             </div>
-            <div class="expertise-item">
-                <h3>Effets Spéciaux</h3>
-                <p>Création d'atmosphères immersives et d'effets visuels uniques.</p>
+            <div class="expertise-item item-aquatique">
+                <a href="collection.html?type=aquatique" class="expertise-item">
+                    <h3>Aquatique</h3>
+                    <p>Mise en mouvement de l'eau pour des chorégraphies aquatiques.</p>
+                </a>
+            </div>
+            <div class="expertise-item item-speciaux">
+                <a href="collection.html?type=fx" class="expertise-item">
+                    <h3>Effets Spéciaux</h3>
+                    <p>Création d'atmosphères immersives et d'effets visuels uniques.</p>
+                </a>
             </div>
         </section>
-
+<svg style="display: none;">
+  <filter id="water-filter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" />
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" />
+  </filter>
+</svg></svg>
         <section class="section-about" id="qui-suis-je">
             <h2>Qui suis-je</h2>
             <div class="divider"></div>
@@ -59,13 +72,13 @@
                 .then(data => { document.getElementById(id).innerHTML = data; })
                 .catch(err => console.error("Erreur de chargement : " + file, err));
         }
-        
+
         loadComponent('header-placeholder', 'header.html');
         loadComponent('footer-placeholder', 'footer.html');
 
         // Animation de texte (Typing Effect)
         const textElement = document.getElementById('typing-text');
-        const strText = "Sculpter l'éphémère"; 
+        const strText = "Sculpter l'éphémère";
         const splitText = strText.split("");
         textElement.innerHTML = "";
 
@@ -86,11 +99,12 @@
                 setTimeout(() => {
                     const btnContainer = document.getElementById('cta-container');
                     if (btnContainer) btnContainer.classList.add('show-btn');
-                }, 500); 
+                }, 500);
             }
         }, 80);
     </script>
     <script src="transitions.js"></script>
     <script src="icon.js"></script>
 </body>
+
 </html>

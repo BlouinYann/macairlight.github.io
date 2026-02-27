@@ -284,6 +284,25 @@
         const defaultSort = document.querySelector('.sort-btn[data-sort="new"]');
         if (defaultSort) defaultSort.click(); 
     });
+    window.addEventListener('load', () => {
+    // 1. On récupère le paramètre "type" dans l'URL (ex: lumiere)
+    const urlParams = new URLSearchParams(window.location.search);
+    const filtreActif = urlParams.get('type');
+
+    if (filtreActif) {
+        // 2. On cherche le bouton de filtre correspondant
+        // (Adapte le sélecteur [data-filter] selon ton système de filtrage)
+        const bouton = document.querySelector(`[data-filter="${filtreActif}"]`);
+
+        if (bouton) {
+            // 3. On simule un clic sur ce bouton pour déclencher le filtre
+            bouton.click();
+            
+            // Optionnel : Scroll automatique vers la galerie pour voir le résultat
+            bouton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+});
 </script>
     <script src="particles-config.js"></script>
     <script src="transitions.js"></script>
