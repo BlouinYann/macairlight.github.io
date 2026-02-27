@@ -23,3 +23,4 @@
     // Console log pour deboguer sur le vrai site (tu pourras le supprimer après)
     console.log("Favicon chargée via : " + finalPath + " | Pathname : " + window.location.pathname);
 })();
+

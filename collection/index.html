@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+<link rel="stylesheet" href="/style.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,11 +30,11 @@
             </div>
         </header>
         <div class="gallery" id="gallery">
-            <a href="collection/gpj_2026.html" class="gallery-item" data-category="fx" data-date="2026-01-27">
+            <a href="gpj_2026.html" class="gallery-item" data-category="fx" data-date="2026-01-27">
                 <span class="item-date"></span>
                 <div class="project-card">
                     <div class="image-container">
-                        <img src="Images/gpj_26.1.jpg" alt="Description">
+                        <img src="/Images/gpj_26.1.jpg" alt="Description">
                     </div>
                     <div class="project-info">
                     </div>
@@ -46,11 +46,11 @@
                 </div>
             </a>
             
-                <a href="collection/oasis_colmar2025.html" class="gallery-item" data-category="fx aquatique" data-date="2025-07-14">
+                <a href="oasis_colmar2025.html" class="gallery-item" data-category="fx aquatique" data-date="2025-07-14">
                     <span class="item-date"></span>
                     <div class="project-card">
                         <div class="image-container">
-                            <img src="Images/oasis_colmar2.jpg" alt="Description">
+                            <img src="/Images/oasis_colmar2.jpg" alt="Description">
                         </div>
                         <div class="project-info">
                         </div>
@@ -62,11 +62,11 @@
                     </div>
                 </a>
 
-               <a href="collection/cnc_2025.html" class="gallery-item" data-category="aquatique" data-date="2025-09-01">
+               <a href="cnc_2025.html" class="gallery-item" data-category="aquatique" data-date="2025-09-01">
                     <span class="item-date"></span>
                     <div class="project-card">
                         <div class="image-container">
-                            <img src="Images/cnc_bh_final2025.jpg" alt="Description">
+                            <img src="/Images/cnc_bh_final2025.jpg" alt="Description">
                         </div>
                         <div class="project-info">
                         </div>
@@ -78,12 +78,12 @@
                     </div>
                 </a>
 
-                <a href="collection/et_pleureuse.html" class="gallery-item" data-category="lumiere"
+                <a href="et_pleureuse.html" class="gallery-item" data-category="lumiere"
                     data-date="2025-06-17">
                     <span class="item-date"></span>
                     <div class="project-card">
                         <div class="image-container">
-                            <img src="Images/et_pleureuse.jpg" alt="Description">
+                            <img src="/Images/et_pleureuse.jpg" alt="Description">
                         </div>
                         <div class="project-info">
                         </div>
@@ -95,11 +95,11 @@
                     </div>
                 </a>
 
-                <a href="collection/cnc_cloture2024.html" class="gallery-item" data-category="aquatique"
+                <a href="cnc_cloture2024.html" class="gallery-item" data-category="aquatique"
                     data-date="2024-09-14">
                     <span class="item-date"></span>
                     <div class="image-container">
-                        <img src="Images/cnc_cloture2024.avif" alt="Nom du projet">
+                        <img src="/Images/cnc_cloture2024.avif" alt="Nom du projet">
                     </div>
                     <div class="item-info">
                         <span class="item-category"></span>
@@ -109,10 +109,10 @@
                     </div>
                 </a>
 
-                <a href="collection/nawal.html" class="gallery-item" data-category="lumiere" data-date="2024-05-12">
+                <a href="nawal.html" class="gallery-item" data-category="lumiere" data-date="2024-05-12">
                     <span class="item-date"></span>
                     <div class="image-container">
-                        <img src="Images/nawal1.jpg" alt="Nom du projet">
+                        <img src="/Images/nawal1.jpg" alt="Nom du projet">
                     </div>
                     <div class="item-info">
                         <span class="item-category"></span>
@@ -122,10 +122,10 @@
                     </div>
                 </a>
 
-                <a href="collection/eden.html" class="gallery-item" data-category="lumiere" data-date="2024-05-28">
+                <a href="eden.html" class="gallery-item" data-category="lumiere" data-date="2024-05-28">
                     <span class="item-date"></span>
                     <div class="image-container">
-                        <img src="Images/eden.avif" alt="Nom du projet">
+                        <img src="/Images/eden.avif" alt="Nom du projet">
                     </div>
                     <div class="item-info">
                         <span class="item-category"></span>
@@ -134,10 +134,10 @@
                     </div>
                 </a>
 
-                <a href="collection/wm_acd.html" class="gallery-item" data-category="lumiere" data-date="2023-09-15">
+                <a href="wm_acd.html" class="gallery-item" data-category="lumiere" data-date="2023-09-15">
                     <span class="item-date"></span>
                     <div class="image-container">
-                        <img src="Images/wm_acd1.jpg" alt="Nom du projet">
+                        <img src="/Images/wm_acd1.jpg" alt="Nom du projet">
                     </div>
                     <div class="item-info">
                         <span class="item-category"></span>
@@ -147,10 +147,10 @@
                     </div>
                 </a>
 
-                <a href="collection/phaysten.html" class="gallery-item" data-category="lumiere" data-date="2022-06-15">
+                <a href="phaysten.html" class="gallery-item" data-category="lumiere" data-date="2022-06-15">
                     <span class="item-date"></span>
                     <div class="image-container">
-                        <img src="Images/phaysten1.avif" alt="Nom du projet">
+                        <img src="/Images/phaysten1.avif" alt="Nom du projet">
                     </div>
                     <div class="item-info">
                         <span class="item-category"></span>
@@ -173,8 +173,8 @@
     function loadComponent(id, file) {
         fetch(file).then(r => r.text()).then(d => { document.getElementById(id).innerHTML = d; });
     }
-    loadComponent('header-placeholder', 'header.html');
-    loadComponent('footer-placeholder', 'footer.html');
+    loadComponent('header-placeholder', '../header.html');
+    loadComponent('footer-placeholder', '../footer.html');
 
     // 3. Initialisation
     const gallery = document.getElementById('gallery');
