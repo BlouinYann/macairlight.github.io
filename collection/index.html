@@ -15,17 +15,30 @@
         <header class="collections-header">
             <h1>Nos Réalisations</h1>
             <div class="controls-wrapper">
+                
                 <div class="filters">
                     <button class="filter-btn active" data-filter="all">tout</button>
                     <button class="filter-btn" data-filter="lumiere">lumière</button>
                     <button class="filter-btn" data-filter="aquatique">aquatique</button>
                     <button class="filter-btn" data-filter="fx">effets spéciaux</button>
+                
                 </div>
                 <div class="sorting">
                     <button class="sort-btn active" data-sort="new">récent</button>
                     <button class="sort-btn" data-sort="old">ancien</button>
                 </div>
+                <div class="controls-container">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Rechercher...">
+        <i class="fas fa-search"></i>
+    </div>
+    <button id="resetFilters" class="reset-btn" title="Réinitialiser tous les filtres">
+        <i class="fas fa-times"></i>
+    </button>
+</div>
+
             </div>
+            
         </header>
         <div class="gallery" id="gallery">
             <a href="gpj_2026.html" class="gallery-item" data-category="fx" data-date="2026-01-27">
@@ -200,67 +213,90 @@
         item.setAttribute('href', `${currentHref}?cat=${encodeURIComponent(catKeyRaw)}&date=${dateValue}&title=${encodeURIComponent(projectTitle)}`);
     });
 
-    // 4. Logique des Filtres (CORRIGÉE)
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            const filter = btn.getAttribute('data-filter');
+    // --- 4. LOGIQUE DES FILTRES ET RECHERCHE COMBINÉS ---
+const searchInput = document.getElementById('searchInput');
+const filterBtns = document.querySelectorAll('.filter-btn');
+let currentFilter = 'all';
 
-            // --- ÉTAPE 1 : Capturer les positions de TOUS les éléments visibles AVANT le changement ---
-            const positions = new Map();
-            galleryItems.forEach(item => {
-                if (item.style.display !== 'none') {
-                    positions.set(item, item.getBoundingClientRect());
+function updateGallery() {
+    const searchText = searchInput ? searchInput.value.toLowerCase() : "";
+    const searchContainer = document.querySelector('.search-box');
+// Allume la loupe en bleu si on a tapé au moins un caractère
+    if (searchText.length > 0) {
+        searchContainer.classList.add('has-text');
+    } else {
+        searchContainer.classList.remove('has-text');
+    }
+    // A. Capturer les positions AVANT le changement (pour l'animation)
+    const positions = new Map();
+    galleryItems.forEach(item => {
+        if (item.style.display !== 'none') {
+            positions.set(item, item.getBoundingClientRect());
+        }
+    });
+
+    // B. Appliquer le double filtre (Catégorie + Recherche)
+    galleryItems.forEach(item => {
+        const itemCategories = item.getAttribute('data-category').split(' ');
+        const title = item.querySelector('h3').textContent.toLowerCase();
+        const desc = item.querySelector('.item-description').textContent.toLowerCase();
+
+        const matchesFilter = (currentFilter === 'all' || itemCategories.includes(currentFilter));
+        const matchesSearch = (title.includes(searchText) || desc.includes(searchText));
+
+        if (matchesFilter && matchesSearch) {
+            item.style.display = 'block';
+            item.style.opacity = '1';
+        } else {
+            item.style.display = 'none';
+            item.style.opacity = '0';
+        }
+    });
+
+    // C. Animer le glissement (FLIP animation)
+    requestAnimationFrame(() => {
+        galleryItems.forEach(item => {
+            if (item.style.display !== 'none' && positions.has(item)) {
+                const oldRect = positions.get(item);
+                const newRect = item.getBoundingClientRect();
+
+                const dx = oldRect.left - newRect.left;
+                const dy = oldRect.top - newRect.top;
+
+                if (dx !== 0 || dy !== 0) {
+                    item.animate([
+                        { transform: `translate(${dx}px, ${dy}px)` },
+                        { transform: 'translate(0, 0)' }
+                    ], {
+                        duration: 500,
+                        easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)'
+                    });
                 }
-            });
-
-            // --- ÉTAPE 2 : Appliquer le filtre (Changement brutal de la grille) ---
-            galleryItems.forEach(item => {
-                const itemCategories = item.getAttribute('data-category').split(' ');
-                const isMatch = filter === 'all' || itemCategories.includes(filter);
-
-                if (isMatch) {
-                    item.style.display = 'block';
-                    item.style.opacity = '1';
-                } else {
-                    item.style.display = 'none';
-                    item.style.opacity = '0';
-                }
-            });
-
-            // --- ÉTAPE 3 : Animer le glissement pour boucher les trous ---
-            requestAnimationFrame(() => {
-                galleryItems.forEach(item => {
-                    if (item.style.display !== 'none' && positions.has(item)) {
-                        const oldRect = positions.get(item);
-                        const newRect = item.getBoundingClientRect();
-
-                        const dx = oldRect.left - newRect.left;
-                        const dy = oldRect.top - newRect.top;
-
-                        if (dx !== 0 || dy !== 0) {
-                            item.animate([
-                                { transform: `translate(${dx}px, ${dy}px)` },
-                                { transform: 'translate(0, 0)' }
-                            ], {
-                                duration: 500,
-                                easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)'
-                            });
-                        }
-                    } else if (item.style.display !== 'none' && !positions.has(item)) {
-                        // Pour les nouveaux éléments qui apparaissent, on fait un petit fade in
-                        item.animate([
-                            { opacity: 0, transform: 'scale(0.9)' },
-                            { opacity: 1, transform: 'scale(1)' }
-                        ], { duration: 400 });
-                    }
-                });
-            });
+            } else if (item.style.display !== 'none' && !positions.has(item)) {
+                // Fade in pour les nouveaux arrivants
+                item.animate([
+                    { opacity: 0, transform: 'scale(0.9)' },
+                    { opacity: 1, transform: 'scale(1)' }
+                ], { duration: 400 });
+            }
         });
     });
+}
+
+// Écouteur pour la barre de recherche
+if (searchInput) {
+    searchInput.addEventListener('input', updateGallery);
+}
+
+// Écouteur pour les boutons de filtres
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-filter');
+        updateGallery();
+    });
+});
 
     // 5. Logique du Tri par Date
     const sortBtns = document.querySelectorAll('.sort-btn');
@@ -300,6 +336,24 @@
             bouton.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
+});
+document.getElementById('resetFilters').addEventListener('click', () => {
+    // 1. Vide la barre de recherche
+    if (searchInput) searchInput.value = '';
+
+    // 2. Remet le filtre sur "Tout"
+    currentFilter = 'all';
+    filterBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-filter') === 'all') btn.classList.add('active');
+    });
+
+    // 3. (Optionnel) Remet le tri sur "Récent"
+    const defaultSort = document.querySelector('.sort-btn[data-sort="new"]');
+    if (defaultSort) defaultSort.click();
+
+    // 4. Met à jour la galerie
+    updateGallery();
 });
 </script>
     <script src="../particles-config.js"></script>
