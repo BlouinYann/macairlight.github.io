@@ -60,7 +60,7 @@ nav {
 }
 
 .logo-text {
-    font-size: 1.6rem;
+    font-size: clamp(1.6rem);
     color: var(--blanc-casse);
     text-decoration: none;
 }
@@ -126,7 +126,7 @@ a:visited {
     border: 1px solid var(--bleu-ardoise);
     color: var(--blanc-casse);
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
+    font-size: clamp(0.7rem);
     font-weight: 300;
     letter-spacing: 4px;
     text-transform: uppercase;
@@ -154,7 +154,7 @@ footer {
 }
 
 .footer-content {
-    font-size: 0.75rem;
+    font-size: clamp(0.75rem);
     color: var(--gris-moyen);
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -166,7 +166,7 @@ footer {
     color: var(--blanc-casse);
     text-decoration: none;
     font-family: 'GlimmerOfLight', serif;
-    font-size: 1.4rem;
+    font-size: clamp(1.4rem);
     transition: opacity 0.3s ease;
     text-transform: lowercase;
     /* Tout en minuscules comme demandé */
@@ -236,7 +236,7 @@ body, main {
         .hero-content { position: relative; z-index: 2; margin-top: 80px; }
         .hero h1 { font-size: clamp(3.5rem, 10vw, 6.5rem); margin-bottom: 10px; }
         .hero p {
-            font-size: 0.9rem;
+            font-size: clamp(0.9rem);
             color: var(--gris-moyen);
             letter-spacing: 5px;
             text-transform: uppercase;
@@ -248,7 +248,7 @@ body, main {
             border: 1px solid var(--bleu-ardoise);
             color: var(--blanc-casse);
             text-decoration: none;
-            font-size: 0.7rem;
+            font-size: clamp(0.7rem);
             letter-spacing: 3px;
             text-transform: uppercase;
             transition: all 0.5s ease;
@@ -303,8 +303,8 @@ body, main {
     /* Pour que l'élément disparaisse de la grille sans laisser de trou géant */
     display: none; 
 }
-        .expertise-item h3 { color: var(--bleu-ardoise); font-size: 1.5rem; margin-bottom: 15px; }
-        .expertise-item p { color: var(--gris-moyen); font-size: 0.9rem; font-weight: 300; }
+        .expertise-item h3 { color: var(--bleu-ardoise); font-size: clamp(1.5rem); margin-bottom: 15px; }
+        .expertise-item p { color: var(--gris-moyen); font-size: clamp(0.9rem); font-weight: 300; }
 
         /* Section À Propos */
         .section-about {
@@ -312,9 +312,9 @@ body, main {
             text-align: center;
             background: transparent;
         }
-        .section-about h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .section-about h2 { font-size: clamp(2.5rem); margin-bottom: 20px; }
         .divider { height: 1px; width: 40px; background-color: var(--bleu-ardoise); margin: 0 auto 40px; }
-        .section-about p { max-width: 700px; margin: 0 auto 20px; color: var(--gris-moyen); font-size: 1.1rem; }
+        .section-about p { max-width: 700px; margin: 0 auto 20px; color: var(--gris-moyen); font-size: clamp(1.1rem); }
 
         @media (max-width: 768px) {
             .expertise-grid { grid-template-columns: 1fr; }
@@ -425,7 +425,7 @@ body, main {
     
     /* --- FORCE TA POLICE ICI --- */
     font-family: 'TaPoliceIci', sans-serif; 
-    font-size: 1rem;
+    font-size: clamp(1rem);
     letter-spacing: 2px; /* Un peu d'espace pour le côté luxe */
     text-transform: uppercase; /* Souvent plus beau pour un CTA */
     
@@ -452,7 +452,7 @@ body, main {
 
         .meta-date {
             display: block;
-            font-size: 0.7rem;
+            font-size: clamp(0.7rem);
             color: var(--gris-moyen);
             letter-spacing: 2px;
             font-family: 'Inter', sans-serif;
@@ -460,7 +460,7 @@ body, main {
         }
 
         .meta-category {
-            font-size: 0.8rem;
+            font-size: clamp(0.8rem);
             color: var(--bleu-clair); /* Bleu plus visible défini précédemment */
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -475,7 +475,7 @@ body, main {
         }
 
         .project-description { 
-            font-size: 1.1rem; 
+            font-size: clamp(1.1rem); 
             color: var(--gris-moyen); 
             max-width: 700px; 
             margin: 0 auto 60px; 
@@ -493,7 +493,7 @@ body, main {
         .copyright-text { 
             display: block; 
             margin-top: 15px; 
-            font-size: 0.75rem; 
+            font-size: clamp(0.75rem); 
             color: var(--gris-moyen); 
             font-style: italic; 
             letter-spacing: 1px;
@@ -517,7 +517,7 @@ body, main {
 
         /* Texte du bas */
         .project-footer-text { 
-            font-size: 0.95rem; 
+            font-size: clamp(0.95rem); 
             color: var(--gris-moyen); 
             max-width: 650px; 
             margin: 0 auto 60px; 
@@ -573,7 +573,7 @@ body, main {
             background: transparent;
             border: none;
             color: var(--gris-moyen);
-            font-size: 1rem;
+            font-size: clamp(1rem);
             cursor: pointer;
             transition: all 0.3s ease;
             padding: 5px 10px;
@@ -627,7 +627,7 @@ body, main {
             top: 25px;
             left: 25px;
             z-index: 10;
-            font-size: 0.65rem;
+            font-size: clamp(0.65rem);
             color: var(--blanc-casse);
             letter-spacing: 2px;
             font-family: 'Inter', sans-serif;
@@ -648,25 +648,29 @@ body, main {
         }
 
         .item-category {
-            font-size: 0.8rem;
-            color: var(--bleu-clair);
-            /* Bleu plus visible */
-            letter-spacing: 3px;
-            margin-bottom: 12px;
-            display: block;
-            text-transform: uppercase;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
+    /* Minimum 0.65rem, Idéal 3vw de l'écran, Maximum 0.8rem */
+    font-size: clamp(0.65rem, 3vw, 0.8rem); 
+    color: var(--bleu-clair);
+    letter-spacing: 2px; /* Réduit légèrement pour gagner de l'espace */
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap; /* Empêche le retour à la ligne pour garder le style "badge" */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Si le mot est vraiment trop long, il mettra "..." */
+}
 
         .item-info h3 {
-            font-size: 1.8rem;
-            color: var(--blanc-casse);
-            margin-bottom: 12px;
-        }
+    /* Minimum 1rem, idéal 4vw, Maximum 1.8rem */
+    font-size: clamp(1rem, 4vw, 1.8rem); 
+    color: var(--blanc-casse);
+    margin-bottom: 12px;
+    line-height: 1.2; /* Pour éviter que les lignes se chevauchent */
+}
 
         .item-description {
-            font-size: 0.9rem;
+            font-size: clamp(0.9rem);
             color: var(--gris-moyen);
             font-weight: 300;
             max-width: 280px;
@@ -734,7 +738,7 @@ body, main {
     background: rgba(0, 0, 0, 0.6);
     color: white;
     border: none;
-    font-size: 1.8rem;
+    font-size: clamp(1.8rem);
     padding: 15px 10px;
     cursor: pointer;
     z-index: 10;
@@ -792,7 +796,7 @@ body, main {
 .about-text h2 {
     margin-top: 0;
     color: var(--bleu-clair);
-    font-size: 2.2rem;
+    font-size: clamp(2.2rem);
 }
 
 /* Responsive : repasse en plein écran sur mobile */
@@ -872,7 +876,7 @@ body, main {
 
 .form-group label {
     color: var(--bleu-clair); /* Ta couleur bleue d'accentuation */
-    font-size: 0.9rem;
+    font-size: clamp(0.9rem);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -900,7 +904,7 @@ body, main {
     color: var(--bleu-clair);
     padding: 15px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: clamp(1rem);
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: 0.4s;
@@ -937,7 +941,7 @@ body, main {
 .contact-info-box .label {
     display: block;
     color: var(--bleu-clair); /* Ton bleu */
-    font-size: 0.8rem;
+    font-size: clamp(0.8rem);
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 10px;
@@ -945,7 +949,7 @@ body, main {
 
 .email-link {
     color: #fff;
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem);
     text-decoration: none;
     font-weight: 300;
     transition: 0.3s;
@@ -969,7 +973,7 @@ body, main {
 .social-icon:visited {
     color: rgba(226, 226, 229, 0.8); /* La couleur de ton paragraphe <p> */
     opacity: 0.7;
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem);
     transition: all 0.3s ease;
     text-decoration: none;
 }
@@ -989,8 +993,8 @@ body, main {
     transition: transform 0.5s ease; cursor: pointer;
 }
 .expertise-item:hover { transform: scale(1.03); }
-.expertise-item h3 { color: var(--bleu-ardoise); font-size: 1.5rem; margin-bottom: 15px; transition: 0.4s; position: relative; z-index: 2; }
-.expertise-item p { color: var(--gris-moyen); font-size: 0.9rem; font-weight: 300; transition: 0.4s; position: relative; z-index: 2; }
+.expertise-item h3 { color: var(--bleu-ardoise); font-size: clamp(1.5rem); margin-bottom: 15px; transition: 0.4s; position: relative; z-index: 2; }
+.expertise-item p { color: var(--gris-moyen); font-size: clamp(0.9rem); font-weight: 300; transition: 0.4s; position: relative; z-index: 2; }
 
 /* --- 1. LUMIÈRE : FLARE STOP-AND-GO --- */
 .item-lumiere {
@@ -1177,12 +1181,12 @@ body, main {
     }
 
     .item-info h3 {
-        font-size: 0.85rem;
+        font-size: clamp(0.85rem);
         margin-bottom: 2px;
     }
 
     .item-category {
-        font-size: 0.6rem;
+        font-size: clamp(0.6rem);
     }
 
     .item-description, .item-date {
@@ -1209,7 +1213,7 @@ body, main {
     border-bottom: 1px solid #ffffff26;
     color: var(--blanc-casse);
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: clamp(0.9rem);
     letter-spacing: 1.5px;
     text-transform: uppercase; /* Style un peu plus "galerie d'art" */
     outline: none;
@@ -1297,7 +1301,7 @@ body, main {
 }
 
 .reset-btn i {
-    font-size: 0.9rem;
+    font-size: clamp(0.9rem);
 }
 /* Centrage de la page d'erreur */
 .error-page {
@@ -1312,7 +1316,7 @@ body, main {
 
 /* Le 404 qui vibre et brûle */
 .error-page h1.logo-central {
-    font-size: 8rem; /* Plus imposant */
+    font-size: clamp(8rem); /* Plus imposant */
     margin-bottom: 0.2em;
     
     /* Animation de reflet automatique combinée au grésillement */
@@ -1325,7 +1329,7 @@ body, main {
 
 .error-page p {
     color: var(--blanc-casse);
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem);
     margin-bottom: 30px;
     opacity: 0.8;
     letter-spacing: 1px;
@@ -1387,7 +1391,7 @@ body, main {
 
 /* L'icône d'avion de papier qui s'envole doucement */
 .success-icon {
-    font-size: 3rem;
+    font-size: clamp(3rem);
     color: var(--bleu-clair);
     margin-bottom: 20px;
     opacity: 0.8;
@@ -1405,7 +1409,7 @@ body, main {
 
 .thanks-message {
     color: var(--blanc-casse);
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem);
     line-height: 1.6;
     max-width: 500px;
     margin-bottom: 40px;
@@ -1445,4 +1449,38 @@ body, main {
 @keyframes pulseGlow {
     0%, 100% { transform: scale(1); opacity: 0.5; }
     50% { transform: scale(1.3); opacity: 0.8; }
+}
+/* Ajustement pour téléphones */
+@media (max-width: 480px) {
+    .logo-central {
+        font-size: clamp(1rem, 15vw, 3.0rem) !important; 
+        letter-spacing: 1px !important;
+        white-space: normal !important; /* Permet le retour à la ligne si nécessaire */
+        padding: 0 10px;
+    }
+    /* Cible uniquement les paragraphes dans le footer */
+    footer p {
+        font-size: 0.65rem !important; /* Taille réduite pour mobile */
+        line-height: 1.4 !important;  /* Espace entre les lignes plus compact */
+        margin-bottom: 10px !important;
+        padding: 0 15px !important;    /* Évite que le texte touche les bords */
+        color: rgba(226, 226, 229, 0.7); /* Optionnel : adoucit la couleur pour la lisibilité */
+        letter-spacing: 0.5px !important; /* Réduit l'espacement pour que ça rentre */
+    }
+    /* Cible la section principale pour réduire son espace du bas */
+    main, section, .contact-container, .collections-container {
+        padding-bottom: 10px !important;
+        margin-bottom: 0 !important;
+    }
+    footer {
+        /* On réduit drastiquement le premier chiffre (le haut) */
+        padding-top: 5px !important;         
+        /* On s'assure qu'il n'y a pas de marge externe en haut */
+        margin-top: 0 !important; 
+    }
+    .sub-logo {
+    position: relative;
+    z-index: 1;         /* On s'assure qu'il reste en dessous */
+    margin-top: -5px;    /* Donne un tout petit peu d'air pour tester */
+}
 }
