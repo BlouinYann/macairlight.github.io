@@ -8,7 +8,6 @@
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
-
     <div id="header-placeholder"></div>
 
     <main class="contact-page">
@@ -20,7 +19,7 @@
         </header>
 
         <section class="contact-container">
-            <form action="https://formspree.io/f/xaqdvllq" method="POST" class="contact-form">
+            <form id="contact-form" action="https://formspree.io/f/xaqdvllq" method="POST" class="contact-form">
                 <div class="form-group">
                     <label>Nom & Prénom</label>
                     <input type="text" name="name" required placeholder="Votre nom">
@@ -41,30 +40,63 @@
                     <textarea name="message" rows="6" required placeholder="Décrivez votre projet..."></textarea>
                 </div>
 
-                <input type="hidden" name="_next" value="https://tonsite.com/merci.html">
-
-                <button type="submit" class="submit-btn">Envoyer le message</button>
+                <button type="submit" id="submit-btn" class="submit-btn">Envoyer le message</button>
             </form>
         </section>
     </main>
-<div class="direct-contact">
-    <div class="contact-info-box">
-        <span class="label">Email Direct</span>
-        <a href="mailto:contact@macairlight.fr" class="email-link">contact@macairlight.fr</a>
-    </div>
-</div>
 
-<form action="https://formspree.io/f/xaqdvllq" method="POST" class="contact-form">
-    </form>
+    <div class="direct-contact">
+        <div class="contact-info-box">
+            <span class="label">Email Direct</span>
+            <a href="mailto:contact@macairlight.fr" class="email-link">contact@macairlight.fr</a>
+        </div>
+    </div>
+
     <div id="footer-placeholder"></div>
 
     <script>
+        // 1. Chargement des composants Header/Footer
         function loadComponent(id, file) {
             fetch(file).then(r => r.text()).then(d => { document.getElementById(id).innerHTML = d; });
         }
         loadComponent('header-placeholder', '../header.html');
         loadComponent('footer-placeholder', '../footer.html');
+
+        // 2. Logique d'envoi AJAX pour redirection personnalisée gratuite
+        const form = document.getElementById("contact-form");
+        const btn = document.getElementById("submit-btn");
+
+        async function handleSubmit(event) {
+            event.preventDefault(); // Empêche Formspree de charger sa propre page
+            
+            const data = new FormData(event.target);
+            btn.innerHTML = "Envoi en cours...";
+            btn.style.opacity = "0.5";
+            btn.disabled = true;
+
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    // REDIRECTION VERS TA PAGE PERSONNALISÉE
+                    window.location.href = "merci.html";
+                } else {
+                    btn.innerHTML = "Erreur...";
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                    alert("Oups ! Un problème est survenu lors de l'envoi.");
+                }
+            }).catch(error => {
+                btn.innerHTML = "Erreur réseau";
+                btn.disabled = false;
+                alert("Erreur de connexion au serveur.");
+            });
+        }
+        form.addEventListener("submit", handleSubmit);
     </script>
+    
     <script src="../particles-config.js"></script>
     <script src="../telephone.js"></script>
     <script src="../icon.js"></script>

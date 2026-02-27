@@ -1299,3 +1299,150 @@ body, main {
 .reset-btn i {
     font-size: 0.9rem;
 }
+/* Centrage de la page d'erreur */
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* Laisse de la place pour le header/footer */
+    text-align: center;
+    padding: 20px;
+}
+
+/* Le 404 qui vibre et brûle */
+.error-page h1.logo-central {
+    font-size: 8rem; /* Plus imposant */
+    margin-bottom: 0.2em;
+    
+    /* Animation de reflet automatique combinée au grésillement */
+    animation: 
+        reflectAuto 3s infinite linear,
+        lightFlicker 0.2s infinite alternate;
+        
+    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.4));
+}
+
+.error-page p {
+    color: var(--blanc-casse);
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+/* Animation : Le reflet bleu qui passe tout seul */
+@keyframes reflectAuto {
+    0% { background-position: 100% center; }
+    100% { background-position: -100% center; }
+}
+
+/* Animation : Le grésillement (brûlage) */
+@keyframes lightFlicker {
+    0% {
+        transform: translate(1px, 0);
+        filter: drop-shadow(0 0 10px var(--bleu-clair)) brightness(1.2);
+    }
+    50% {
+        transform: translate(-1px, 1px);
+        filter: drop-shadow(0 0 25px #ff4d4d) brightness(0.8); /* Pointe de rouge feu */
+    }
+    100% {
+        transform: translate(0, -1px);
+        filter: drop-shadow(0 0 15px var(--bleu-clair)) brightness(1.1);
+    }
+}
+/* La barre elle-même */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Le fond de la barre */
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+/* Le bouton de défilement (le "ascenseur") */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, transparent, var(--bleu-clair), transparent);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--bleu-clair);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bleu-clair);
+}
+/* --- PAGE MERCI : SÉRÉNITÉ --- */
+
+.thanks-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* L'icône d'avion de papier qui s'envole doucement */
+.success-icon {
+    font-size: 3rem;
+    color: var(--bleu-clair);
+    margin-bottom: 20px;
+    opacity: 0.8;
+    animation: planeFloat 3s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px var(--bleu-clair));
+}
+
+.thanks-page h1.logo-central {
+    font-size: clamp(4rem, 10vw, 7rem);
+    margin-bottom: 15px;
+    /* On utilise ton reflet bleu signature mais de façon plus lente */
+    animation: reflectAuto 6s infinite linear;
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2));
+}
+
+.thanks-message {
+    color: var(--blanc-casse);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards 0.5s; /* Apparition douce décalée */
+    letter-spacing: 0.5px;
+}
+
+/* --- ANIMATIONS SPÉCIFIQUES --- */
+
+/* L'avion qui plane */
+@keyframes planeFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+    50% { transform: translateY(-15px) rotate(5deg); opacity: 1; }
+}
+
+/* Apparition du texte */
+@keyframes fadeInUp {
+    to {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+}
+
+/* Halo de fond apaisant */
+.thanks-page::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+    z-index: -1;
+    animation: pulseGlow 4s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+}

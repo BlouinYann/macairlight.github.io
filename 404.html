@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macair'Light | Lumière, Eau & Effets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div id="header-placeholder"></div>
+
+<main class="error-page">
+    <h1 class="logo-central">404</h1>
+    <p>Oups ! Cette lumière s'est éteinte...</p>
+    <a href="index.html" class="filter-btn active">Retour à l'accueil</a>
+</main>
+
+
+    <div id="footer-placeholder"></div>
+    <script src="particles-config.js"></script>
+    <script src="telephone.js"></script>
+    <script src="icon.js"></script>
+    
+    <script>
+    // Chargement Header/Footer
+    function loadComponent(id, file) {
+        fetch(file).then(r => r.text()).then(d => { document.getElementById(id).innerHTML = d; });
+    }
+    loadComponent('header-placeholder', 'header.html');
+    loadComponent('footer-placeholder', 'footer.html');
+</script>
+</body>
+
+</html>
