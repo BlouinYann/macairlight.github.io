@@ -92,18 +92,27 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Pas de carrousel sur cette page.");
     }
 
-    // --- PARTIE 3 : RÉCUPÉRATION DES PARAMÈTRES D'URL ---
-    const categoryNames = { 'lumiere': 'Lumière', 'aquatique': 'Aquatique', 'fx': 'Effets Spéciaux' };
+    // --- PARTIE 3 : RÉCUPÉRATION DES PARAMÈTRES D'URL (CORRIGÉE POUR DOUBLE CAT) ---
+    const categoryNames = { 
+        'lumiere': 'Lumière', 
+        'aquatique': 'Aquatique', 
+        'fx': 'Effets Spéciaux' 
+    };
     const dateFormatter = new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' });
 
     const params = new URLSearchParams(window.location.search);
-    const catKey = params.get('cat');
+    const catKey = params.get('cat'); // Peut être "lumiere" ou "lumiere fx"
     const dateVal = params.get('date');
     const titleVal = params.get('title');
 
-    if (catKey && categoryNames[catKey]) {
+    // Gestion de la double catégorie
+    if (catKey) {
         const autoCat = document.getElementById('auto-category');
-        if (autoCat) autoCat.textContent = categoryNames[catKey];
+        if (autoCat) {
+            // On sépare les mots, on traduit chaque mot, et on les rejoint avec une virgule
+            const namesArray = catKey.split(' ').map(key => categoryNames[key] || key);
+            autoCat.textContent = namesArray.join(', ');
+        }
     }
 
     if (dateVal) {
@@ -116,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (titleVal) {
         const projectTitle = document.querySelector('.project-title');
-        if (projectTitle) projectTitle.textContent = titleVal;
-        document.title = titleVal + " | Macair'Light";
+        if (projectTitle) projectTitle.textContent = decodeURIComponent(titleVal);
+        document.title = decodeURIComponent(titleVal) + " | Macair'Light";
     }
 
     // --- PARTIE 4 : CHARGEMENT HEADER/FOOTER (RELATIF) ---
