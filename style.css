@@ -201,6 +201,7 @@ footer {
     width: 100%;
     height: 100%;
     
+    
     /* Place le canvas derrière TOUT le contenu du site */
     z-index: -1; 
     
@@ -349,32 +350,15 @@ body, main {
     transform: scale(1.1); /* Zoom léger lors du hover */
     opacity: 0.6;          /* S'éclaircit légèrement au survol */
 }
-
 .logo-central {
-    /* --- SÉCURITÉ ANTI-SÉLECTION --- */
-    user-select: none;
-    -webkit-user-select: none;
-    cursor: default;
-
-    /* --- AFFICHAGE ET ANTI-CROP RADICAL --- */
     display: inline-block;
-    position: relative;
-    
-    /* On utilise padding + margin pour créer une zone de sécurité */
-    padding: 0.3em 0.6em; 
-    margin: -0.3em -0.6em;
-    
-    /* La propriété magique pour les empattements qui dépassent */
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    
-    /* Hauteur de ligne généreuse pour le haut du L */
-    line-height: 1.6;
-    overflow: visible;
+    position: relative; /* Indispensable pour que le z-index fonctionne */
+    z-index: 10;        /* Place le logo sur une couche supérieure */
 
-    /* --- COULEUR ET REFLET RÉACTIF --- */
-    color: var(--blanc-casse);
+    white-space: nowrap;
+    padding-bottom: 0.15em; /* Laisse de la place au crochet du L */
     
+    /* On garde tes styles de dégradé... */
     background: linear-gradient(
         to right, 
         var(--blanc-casse) 0%, 
@@ -383,39 +367,22 @@ body, main {
         var(--blanc-casse) 60%, 
         var(--blanc-casse) 100%
     );
-    
-    /* On reste sur 300% pour la réactivité */
     background-size: 300% 100%;
-    background-position: 95% center; /* Départ très proche du bleu */
-    
+    background-position: 95% center;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-
-    /* Transition pour un retour fluide au blanc */
-    transition: background-position 0.8s ease-out;
+    
+    transition: background-position 2s cubic-bezier(0.1, 0, 0.3, 1);
 }
 
-/* --- ANIMATION AU SURVOL --- */
-.logo-central:hover {
-    /* Départ immédiat à 95% -> Fin à 5% */
-    animation: reflect-instant-no-crop 3s cubic-bezier(0.1, 0, 0.3, 1) forwards;
-}
-
-@keyframes reflect-instant-no-crop {
-    0% {
-        background-position: 95% center;
-    }
-    100% {
-        background-position: 5% center;
-    }
+.logo-central.animate {
+    background-position: 5% center; /* Position finale du reflet */
 }
 .sub-logo {
-    user-select: none;
-    -webkit-user-select: none;
-    color: var(--blanc-casse);
-    font-size: 1.2rem;
-    margin-top: 10px;
+    position: relative;
+    z-index: 1;         /* On s'assure qu'il reste en dessous */
+    margin-top: -20px;    /* Donne un tout petit peu d'air pour tester */
 }
 
 /* Style pour chaque lettre générée par le JS */
@@ -1013,24 +980,6 @@ body, main {
     opacity: 1;
     transform: translateY(-3px);
 }
-/* Media Query pour mobiles */
-@media (max-width: 768px) {
-    #gallery {
-        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
-        padding: 50px 5%;        /* On réduit les marges sur les côtés */
-        gap: 20px;               /* On réduit l'espace entre les cases */
-    }
-
-    .gallery-item {
-        height: 350px;           /* On réduit la hauteur des cases pour moins scroller */
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;       /* On réduit la taille du titre principal */
-    }
-}
-
-
 
 /* --- BASE --- */
 .expertise-item { 
@@ -1141,4 +1090,102 @@ body, main {
 @keyframes flicker {
     0% { opacity: 0.8; transform: skewX(-1deg) scale(1.05); }
     100% { opacity: 1; transform: skewX(1deg) scale(1); }
+}
+
+/* Media Query pour mobiles */
+/* 1. État par défaut (Ordinateur) */
+.menu-toggle {
+    display: none; /* Caché sur PC */
+}
+
+/* 2. État Mobile (Tablettes et Téléphones) */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        cursor: pointer;
+        z-index: 2000; /* Toujours au-dessus */
+    }
+
+    .bar {
+        width: 100%;
+        height: 3px;
+        background-color: var(--blanc-casse, #fff);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+
+        /* Positionnement hors-écran */
+        position: fixed;
+        top: 0;
+        right: -100%; 
+        width: 100%;
+        height: 100vh;
+        background-color: var(--noir-fond, #000);
+        transition: right 0.4s ease-in-out;
+        z-index: 1500;
+    }
+
+    /* CLASSE ACTIVE (déclenchée par le JS) */
+    .nav-links.active {
+        right: 0; /* Le menu glisse vers la gauche */
+    }
+
+    /* Animation des traits en Croix (X) */
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+}
+@media (max-width: 480px) {
+    /* 1. Grille en 2 colonnes */
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px; 
+        padding: 10px;
+    }
+
+    /* 2. On définit une hauteur fixe pour le CUBE entier */
+    .gallery-item {
+        height: 180px; /* Ajuste cette valeur selon si tu veux des carrés ou des rectangles */
+    }
+
+    /* 3. L'image doit remplir 100% du cube */
+    .image-container {
+        height: 100%; 
+        width: 100%;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Remplit tout l'espace sans déformer */
+    }
+
+    /* 4. Ajustement des textes pour ne pas masquer l'image */
+    .item-info {
+        padding: 10px;
+    }
+
+    .item-info h3 {
+        font-size: 0.85rem;
+        margin-bottom: 2px;
+    }
+
+    .item-category {
+        font-size: 0.6rem;
+    }
+
+    .item-description, .item-date {
+        display: none; 
+    }
 }

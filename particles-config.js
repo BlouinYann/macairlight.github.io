@@ -102,3 +102,4 @@ if (canvas) {
     initParticles();
     animate();
 }
+

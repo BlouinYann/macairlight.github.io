@@ -20,7 +20,7 @@
                 <h1 class="logo-central">Macair'Light</h1>
                 <p id="typing-text" class="sub-logo">Sculpter l'éphémère</p>
                 <div id="cta-container">
-                    <a href="collection.html" class="btn-decouvrir">Découvrir l'univers</a>
+                    <a href="collection/" class="btn-decouvrir">Découvrir l'univers</a>
                 </div>
             </div>
         </header>
@@ -102,9 +102,36 @@
                 }, 500);
             }
         }, 80);
+        // --- ANIMATION DU LOGO CENTRAL ---
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const logo = document.querySelector('.logo-central');
+        if (!logo) return;
+
+        // 1. Lancement automatique après 1s
+        setTimeout(() => {
+            logo.classList.add('animate');
+        }, 1000);
+
+        // 2. Relance au survol
+        logo.addEventListener('mouseenter', () => {
+            // Désactive la transition pour revenir au début sans que ça se voie
+            logo.style.transition = 'none';
+            logo.classList.remove('animate');
+            
+            // Force le navigateur à appliquer le changement
+            void logo.offsetWidth; 
+            
+            // Réactive la transition et lance l'effet
+            logo.style.transition = 'background-position 2s cubic-bezier(0.1, 0, 0.3, 1)';
+            logo.classList.add('animate');
+        });
+    }, 600); 
+});
     </script>
-    <script src="transitions.js"></script>
+    <script src="telephone.js"></script>
     <script src="icon.js"></script>
+    
 </body>
 
 </html>
