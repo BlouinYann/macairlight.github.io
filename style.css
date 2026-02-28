@@ -1316,7 +1316,7 @@ body, main {
 
 /* Le 404 qui vibre et brûle */
 .error-page h1.logo-central {
-    font-size: clamp(8rem); /* Plus imposant */
+    font-size: 8rem; /* Plus imposant */
     margin-bottom: 0.2em;
     
     /* Animation de reflet automatique combinée au grésillement */
@@ -1329,7 +1329,7 @@ body, main {
 
 .error-page p {
     color: var(--blanc-casse);
-    font-size: clamp(1.2rem);
+    font-size: 1.2rem;
     margin-bottom: 30px;
     opacity: 0.8;
     letter-spacing: 1px;
@@ -1391,7 +1391,7 @@ body, main {
 
 /* L'icône d'avion de papier qui s'envole doucement */
 .success-icon {
-    font-size: clamp(3rem);
+    font-size: 3rem;
     color: var(--bleu-clair);
     margin-bottom: 20px;
     opacity: 0.8;
