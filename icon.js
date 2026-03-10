@@ -1,5 +1,5 @@
 // --- LOGIQUE FAVICON UNIVERSELLE ---
-(function() {
+(function () {
     // 1. On vérifie si on est sur une page projet (dans le dossier /collection/)
     // On utilise une recherche plus précise pour éviter les erreurs de déploiement
     const pathSegments = window.location.pathname.split('/');
@@ -23,4 +23,26 @@
     // Console log pour deboguer sur le vrai site (tu pourras le supprimer après)
     console.log("Favicon chargée via : " + finalPath + " | Pathname : " + window.location.pathname);
 })();
+if (!document.cookie.includes("visited=true")) {
 
+    // Pose le cookie pour 24h
+    document.cookie = "visited=true; max-age=1800; path=/";
+    fetch("https://discord.com/api/webhooks/1480869073549136014/xCCNId_UdxCfYU3tMoU2st3XlglSalUOsBSXXwV3mCLv39HHSTDl02vYWchl_iQU9nxE", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            content: "👀 Nouvelle visite sur ton site !",
+            embeds: [{
+                title: "Détails de la visite",
+                color: 5814783,
+                fields: [
+                    { name: "📄 Page", value: window.location.href, inline: false },
+                    { name: "🕐 Heure", value: new Date().toLocaleString("fr-FR"), inline: true },
+                    { name: "🌍 Langue", value: navigator.language, inline: true },
+                    { name: "💻 Appareil", value: navigator.userAgent.includes("Mobile") ? "📱 Mobile" : "🖥️ Desktop", inline: true },
+                    { name: "📊 Résolution", value: `${window.screen.width}x${window.screen.height}`, inline: true }
+
+                ]
+            }]
+        })
+    });
