@@ -23,26 +23,35 @@
     // Console log pour deboguer sur le vrai site (tu pourras le supprimer après)
     console.log("Favicon chargée via : " + finalPath + " | Pathname : " + window.location.pathname);
 })();
-if (!document.cookie.includes("visited=true")) {
+function getCookie(name) {
+    const cookies = document.cookie.split(";");
+    for (let cookie of cookies) {
+      const [key, value] = cookie.trim().split("=");
+      if (key === name) return value;
+    }
+    return null;
+  }
 
-    // Pose le cookie pour 24h
-    document.cookie = "visited=true; max-age=1800; path=/";
-    fetch("https://discord.com/api/webhooks/1480869073549136014/xCCNId_UdxCfYU3tMoU2st3XlglSalUOsBSXXwV3mCLv39HHSTDl02vYWchl_iQU9nxE", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            content: "👀 Nouvelle visite sur ton site !",
-            embeds: [{
-                title: "Détails de la visite",
-                color: 5814783,
-                fields: [
-                    { name: "📄 Page", value: window.location.href, inline: false },
-                    { name: "🕐 Heure", value: new Date().toLocaleString("fr-FR"), inline: true },
-                    { name: "🌍 Langue", value: navigator.language, inline: true },
-                    { name: "💻 Appareil", value: navigator.userAgent.includes("Mobile") ? "📱 Mobile" : "🖥️ Desktop", inline: true },
-                    { name: "📊 Résolution", value: `${window.screen.width}x${window.screen.height}`, inline: true }
+  if (!getCookie("visited")) {
 
-                ]
-            }]
-        })
+    document.cookie = "visited=true; max-age=5; path=/";
+
+    fetch("https://discord.com/api/webhooks/TON_ID/TON_TOKEN", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: "👀 Nouvelle visite sur ton site !",
+        embeds: [{
+          title: "Détails de la visite",
+          color: 5814783,
+          fields: [
+            { name: "📄 Page d'entrée", value: window.location.href, inline: false },
+            { name: "🕐 Heure", value: new Date().toLocaleString("fr-FR"), inline: true },
+            { name: "🌍 Langue", value: navigator.language, inline: true },
+            { name: "💻 Appareil", value: navigator.userAgent.includes("Mobile") ? "📱 Mobile" : "🖥️ Desktop", inline: true },
+            { name: "🔗 Référent", value: document.referrer || "Direct", inline: false }
+          ]
+        }]
+      })
     });
+  }
